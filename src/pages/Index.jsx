@@ -30,7 +30,9 @@ const SlotMachine = () => {
         <Button leftIcon={<FaRedo />} colorScheme="teal" onClick={spin}>
           Spin
         </Button>
-        <Text>{slots[0] === slots[1] && slots[1] === slots[2] ? "🎉 Congratulations, you won!" : "Try again!"}</Text>
+        <Text color="green.500" fontSize="xl">
+          {slots[0] === slots[1] && slots[1] === slots[2] ? "🎉🎉🎉 Congratulations, you hit the jackpot! 🎉🎉🎉" : "Try again!"}
+        </Text>
       </VStack>
     </Container>
   );
