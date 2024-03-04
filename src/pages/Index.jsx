@@ -64,9 +64,11 @@ const SlotMachine = () => {
           {isSpinning ? "Stop Auto-Spin" : "Auto-Spin"}
         </Button>
         <VStack spacing={4}>
-          <Text color="green.500" fontSize="xl">
-            {slots[0] === slots[1] && slots[1] === slots[2] ? "🎉🎉🎉 Congratulations, you hit the jackpot! 🎉🎉🎉" : "Try again!"}
-          </Text>
+          {!isSpinning && (
+            <Text color="green.500" fontSize="xl">
+              {slots[0] === slots[1] && slots[1] === slots[2] ? "🎉🎉🎉 Congratulations, you hit the jackpot! 🎉🎉🎉" : "Try again!"}
+            </Text>
+          )}
           <Text fontSize="md">Credits: {credits}</Text>
         </VStack>
       </VStack>
