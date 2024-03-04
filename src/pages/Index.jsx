@@ -6,11 +6,27 @@ const emojis = ["🍒", "🍋", "🍊", "🍉", "🍇", "🍓", "🍌", "🍍", 
 
 const getRandomEmoji = () => emojis[Math.floor(Math.random() * emojis.length)];
 
+import { useEffect } from "react";
+
 const SlotMachine = () => {
   const [slots, setSlots] = useState([getRandomEmoji(), getRandomEmoji(), getRandomEmoji()]);
+  const [isSpinning, setIsSpinning] = useState(false);
+
+  useEffect(() => {
+    let spinInterval;
+    if (isSpinning) {
+      spinInterval = setInterval(() => {
+        setSlots([getRandomEmoji(), getRandomEmoji(), getRandomEmoji()]);
+      }, 100);
+    }
+    return () => clearInterval(spinInterval);
+  }, [isSpinning]);
 
   const spin = () => {
-    setSlots([getRandomEmoji(), getRandomEmoji(), getRandomEmoji()]);
+    setIsSpinning(true);
+    setTimeout(() => {
+      setIsSpinning(false);
+    }, 2000);
   };
 
   return (
