@@ -7,6 +7,7 @@ const emojis = ["🍒", "🍋", "🍊", "🍉", "🍇", "🍓", "🍌", "🍍", 
 const getRandomEmoji = () => emojis[Math.floor(Math.random() * emojis.length)];
 
 import { useEffect } from "react";
+import AnnoyingBanner from "../components/AnnoyingBanner";
 
 const SlotMachine = () => {
   const [slots, setSlots] = useState([getRandomEmoji(), getRandomEmoji(), getRandomEmoji()]);
@@ -80,6 +81,7 @@ const Index = () => {
   return (
     <Center h="100vh" bg="gray.50">
       <SlotMachine />
+      <AnnoyingBanner />
     </Center>
   );
 };
