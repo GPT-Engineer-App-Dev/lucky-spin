@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Button, Center, Container, Divider, Flex, Heading, Text, VStack } from "@chakra-ui/react";
 import { FaRedo } from "react-icons/fa";
+import AnnoyingBanner from "../components/AnnoyingBanner";
+import PromotionBanner from "../components/PromotionBanner";
 
 const emojis = ["🍒", "🍋", "🍊", "🍉", "🍇", "🍓", "🍌", "🍍", "🥭"];
 
 const getRandomEmoji = () => emojis[Math.floor(Math.random() * emojis.length)];
-
-import { useEffect } from "react";
-import AnnoyingBanner from "../components/AnnoyingBanner";
 
 const SlotMachine = () => {
   const [slots, setSlots] = useState([getRandomEmoji(), getRandomEmoji(), getRandomEmoji()]);
@@ -80,6 +79,7 @@ const SlotMachine = () => {
 const Index = () => {
   return (
     <Center h="100vh" bg="gray.50">
+      <PromotionBanner />
       <SlotMachine />
       <AnnoyingBanner />
     </Center>
