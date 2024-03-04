@@ -34,7 +34,8 @@ const SlotMachine = () => {
         if (slots[0] === slots[1] && slots[1] === slots[2]) {
           setCredits((prevCredits) => prevCredits + 49);
         }
-        if (isSpinning && credits > 1) {
+        if (isSpinning && credits > 0) {
+          setCredits(credits - 1);
           spin();
         }
       }, 2000);
