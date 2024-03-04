@@ -10,6 +10,7 @@ import { useEffect } from "react";
 
 const SlotMachine = () => {
   const [slots, setSlots] = useState([getRandomEmoji(), getRandomEmoji(), getRandomEmoji()]);
+  const [credits, setCredits] = useState(100);
   const [isSpinning, setIsSpinning] = useState(false);
 
   useEffect(() => {
@@ -23,10 +24,16 @@ const SlotMachine = () => {
   }, [isSpinning]);
 
   const spin = () => {
-    setIsSpinning(true);
-    setTimeout(() => {
-      setIsSpinning(false);
-    }, 2000);
+    if (credits > 0) {
+      setCredits(credits - 1);
+      setIsSpinning(true);
+      setTimeout(() => {
+        setIsSpinning(false);
+        if (slots[0] === slots[1] && slots[1] === slots[2]) {
+          setCredits(credits + 49);
+        }
+      }, 2000);
+    }
   };
 
   return (
@@ -43,12 +50,15 @@ const SlotMachine = () => {
             </Box>
           ))}
         </Flex>
-        <Button leftIcon={<FaRedo />} colorScheme="teal" onClick={spin}>
+        <Button leftIcon={<FaRedo />} colorScheme="teal" onClick={spin} isDisabled={credits <= 0}>
           Spin
         </Button>
-        <Text color="green.500" fontSize="xl">
-          {slots[0] === slots[1] && slots[1] === slots[2] ? "🎉🎉🎉 Congratulations, you hit the jackpot! 🎉🎉🎉" : "Try again!"}
-        </Text>
+        <VStack spacing={4}>
+          <Text color="green.500" fontSize="xl">
+            {slots[0] === slots[1] && slots[1] === slots[2] ? "🎉🎉🎉 Congratulations, you hit the jackpot! 🎉🎉🎉" : "Try again!"}
+          </Text>
+          <Text fontSize="md">Credits: {credits}</Text>
+        </VStack>
       </VStack>
     </Container>
   );
