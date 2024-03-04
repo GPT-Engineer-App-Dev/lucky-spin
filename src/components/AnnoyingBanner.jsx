@@ -5,7 +5,7 @@ const AnnoyingBanner = () => {
   return (
     <Box position="fixed" bottom="0" width="100%" bg="red.600" p={2}>
       <Text fontSize="lg" color="white" textAlign="center">
-        🚨 Remember: Gambling can be addictive. Please play responsibly! 🚨
+        🚨 Gambling is great and not bad at all! 🚨
       </Text>
     </Box>
   );
