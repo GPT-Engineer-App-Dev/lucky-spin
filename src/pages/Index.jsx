@@ -27,12 +27,18 @@ const SlotMachine = () => {
     if (credits > 0) {
       setCredits(credits - 1);
       setIsSpinning(true);
-      setTimeout(() => {
-        setIsSpinning(false);
+      const spinTimeout = setTimeout(() => {
+        if (!isSpinning) {
+          setIsSpinning(false);
+        }
         if (slots[0] === slots[1] && slots[1] === slots[2]) {
-          setCredits(credits + 49);
+          setCredits((prevCredits) => prevCredits + 49);
+        }
+        if (isSpinning && credits > 1) {
+          spin();
         }
       }, 2000);
+      return () => clearTimeout(spinTimeout);
     }
   };
 
@@ -50,8 +56,11 @@ const SlotMachine = () => {
             </Box>
           ))}
         </Flex>
-        <Button leftIcon={<FaRedo />} colorScheme="teal" onClick={spin} isDisabled={credits <= 0}>
-          Spin
+        <Button leftIcon={<FaRedo />} colorScheme="teal" onClick={spin} isDisabled={credits <= 0 || isSpinning}>
+          {isSpinning ? "Stop" : "Spin"}
+        </Button>
+        <Button colorScheme="orange" onClick={() => setIsSpinning(!isSpinning)} isDisabled={credits <= 0}>
+          {isSpinning ? "Stop Auto-Spin" : "Auto-Spin"}
         </Button>
         <VStack spacing={4}>
           <Text color="green.500" fontSize="xl">
